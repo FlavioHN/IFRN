@@ -1,0 +1,66 @@
+
+instalação e configuração postfix, dovecot, 
+ 
+apt update
+
+#apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+apt install nano -y
+apt install telnet -y
+apt install netstat -y
+apt install postfix -y (internt site)
+apt install dovecot-core dovecot-pop3d dovecot-imapd -y
+apt install squirrelmail -y
+
+apt update
+apt upgrade -y
+
+---
+#configuração postfix
+
+/etc/postfix/main.cf
+#myorigin = /etc/mailname
+myorigin = rn.asa.br
+smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
+myhostname = mail.rn.asa.br
+mydestination = $myhostname, /etc/mailname, localhost, localhost.localdomain, localhost
+mynetworks = 127.0.0.0/8 10.25.0.0/16 [::ffff:127.0.0.0]/104 [::1]/128
+home_mailbox = Maildir/
+
+---
+
+/etc/init.d/postfix restart
+netstat -antp (retorna - LISTEN 3572/master)
+
+tail -f /var/log/mail.log
+
+---
+#configuração dovecot
+
+/etc/dovecot/dovecot.conf
+
+/etc/dovecot/conf.d/10-auth.conf
+disable_plaintext-auth = no
+auth_mechanisms = plain login
+
+/etc/dovecot/conf.d/10-mail.conf
+mail_privileged_group = mail
+
+---
+netstat -antp (retorna - LISTEN 5900/dovecot)
+/etc/init.d/dovecot restart
+
+---
+#configuração dovecot
+/etc/squirrelmail/apache.conf
+Alias /webmail /usr/share/squirrelmail
+
+/etc/apache2.conf/conf-available 
+ln -s /etc/squirrelmail/apache.conf squirrelmail.conf
+a2enconf squirrelmail
+/etc/init.d/apache2 restart
+
+
+
+
+
+
