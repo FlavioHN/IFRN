@@ -59,8 +59,18 @@ ln -s /etc/squirrelmail/apache.conf squirrelmail.conf
 a2enconf squirrelmail
 /etc/init.d/apache2 restart
 
+-----
+Comandos docker
+-construir image:
+1. docker image build -t nome-para-imagem .
 
+-run image: 
+1. docker container run -d --name postfix postfix:0.5
+2. docker container run -ti --name postfix -p 8080:80 postfix:0.5
+3. docker container run -d postfix:0.5
 
+-exec image:
+1. docker container run -d postfix:0.5
 
-
-
+-copiar arquivo do container para maquina host
+1. docker cp <container_id>:/caminho/para/arquivo.conf /caminho/para/maquina/host/arquivo.conf
