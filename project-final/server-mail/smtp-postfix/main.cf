@@ -8,7 +8,7 @@
 
 myorigin = rn.asa.br
 
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu) "Servidor de email mail.rn.asa.br"
+smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu) "Servidor de email rn.asa.br"
 biff = no
 
 # appending .domain is the MUA's job.
