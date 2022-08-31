@@ -21,4 +21,4 @@ $TTL	604800
 ns1			A	192.168.1.7
 ;ns2		A	192.168.1.7
 mail		A	192.168.1.7
-www				CNAME	ns1
+www		CNAME	ns1
